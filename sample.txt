@@ -1,1 +1,77 @@
-Nepal is a landlocked country in South Asia, situated between India and China. It is known for its stunning natural beauty, including the Himalayas and Mount Everest, the world's highest peak. The capital city, Kathmandu, is rich in history, culture, and ancient temples. Nepal is home to diverse ethnic groups, languages, and traditions, making it a culturally vibrant nation. Tourism, agriculture, and remittances play important roles in the country's economy, while its warm hospitality attracts visitors from around the world.
+Retrieval‑Augmented Generation (RAG)
+Retrieval‑Augmented Generation (RAG) is an AI architecture that combines retrieval of relevant information from external sources with generation by a language model. Instead of relying solely on pre‑trained knowledge, RAG pipelines fetch contextually relevant documents and use them to produce grounded, accurate, and explainable outputs. This approach reduces hallucinations and makes AI systems more reliable for real‑world applications.
+
+1. Document Ingestion
+The first step in a RAG pipeline is data ingestion. Raw documents such as PDFs, text files, or web pages are collected.
+
+Parsing: Files are converted into machine‑readable text. For PDFs, libraries like PyMuPDF or OCR tools handle extraction.
+
+Cleaning: Removing noise, formatting inconsistencies, and irrelevant metadata ensures high‑quality input.
+
+Chunking: Large documents are split into smaller segments (e.g., 500–1000 tokens) to make retrieval efficient.
+
+2. Embedding
+Once documents are chunked, each segment is transformed into a vector representation using embedding models.
+
+Purpose: Embeddings capture semantic meaning, allowing the system to understand context beyond exact keywords.
+
+Tools: SentenceTransformers, OpenAI embeddings, or Hugging Face models are commonly used.
+
+Output: A high‑dimensional vector space where semantically similar chunks are positioned close together.
+
+3. Vector Database Storage
+The embeddings are stored in a vector database for efficient retrieval.
+
+Popular Options: FAISS (local, lightweight), Pinecone (cloud‑based, scalable), ChromaDB (developer‑friendly).
+
+Functionality: Supports similarity search, indexing, and metadata filtering.
+
+Benefit: Enables fast retrieval of relevant chunks even from millions of documents.
+
+4. Query Processing
+When a user asks a question, the query itself is embedded into the same vector space.
+
+Similarity Search: The system compares the query vector with stored document vectors.
+
+Top‑K Retrieval: The most relevant chunks (e.g., top 5 or 10) are selected.
+
+Hybrid Search: Combines semantic similarity with keyword or BM25 ranking for better precision.
+
+5. Context Assembly
+The retrieved chunks are assembled into a context package.
+
+Deduplication: Removes overlapping or redundant information.
+
+Ranking: Orders chunks by relevance and confidence score.
+
+Formatting: Prepares the context in a structured way for the language model.
+
+6. Generation
+The language model (LLM) receives the user query along with the retrieved context.
+
+Prompt Engineering: The context is injected into the prompt to guide the model.
+
+Output: The LLM generates an answer that is grounded in the retrieved documents.
+
+Citation: Some RAG systems include references to sources, enhancing transparency.
+
+7. Feedback and Iteration
+Advanced RAG pipelines include feedback loops:
+
+Self‑Correction: The model re‑evaluates low‑confidence answers.
+
+User Feedback: Corrections from users improve retrieval quality.
+
+Continuous Learning: Pipelines update embeddings as new documents are ingested.
+
+Advantages of RAG
+Reduces hallucinations by grounding answers in external data.
+
+Scales to large knowledge bases.
+
+Provides explainability through citations.
+
+Flexible across domains: legal, medical, educational, and enterprise.
+
+Conclusion
+RAG pipelines represent a powerful evolution in AI, bridging the gap between static pre‑trained models and dynamic, knowledge‑driven systems. By combining document ingestion, embedding, retrieval, and generation, RAG ensures that AI outputs are accurate, context‑aware, and trustworthy. As organizations adopt RAG, it will become a cornerstone of production‑ready AI applications, from chatbots to research assistants.
