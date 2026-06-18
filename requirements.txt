@@ -5,3 +5,6 @@ llama-index-embeddings-google-genai
 llama-index-llms-openai-like
 sounddevice
 soundfile
+fastapi
+uvicorn[standard]
+python-multipart
