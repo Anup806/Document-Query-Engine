@@ -1,4 +1,4 @@
-# RAG Bootcamp
+# Document-Query-Engine 
 
 This project is a FastAPI RAG demo with a web chat UI, a browser voice-chat endpoint, and a separate terminal voice agent.
 
