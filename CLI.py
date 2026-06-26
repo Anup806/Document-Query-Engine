@@ -1,6 +1,5 @@
 from rag_engine import RAGEngine
 
-
 def run_agent() -> None:
     engine = RAGEngine()
     history: list[dict] = []
