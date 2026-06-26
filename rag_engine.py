@@ -1,11 +1,7 @@
 """
-rag_engine.py
--------------
-Reusable RAG core extracted from the original CLI script.
-
 This module exposes a single `RAGEngine` class that:
   - configures the embedding model (Gemini) and LLM (Groq via OpenAILike)
-  - builds an in-memory vector index over the Nepal knowledge base
+  - builds an in-memory vector index over the sample.txt file
   
 
 Loading models and building the index is expensive, so create ONE
@@ -27,10 +23,15 @@ SYSTEM_PROMPT = """
 You are a production-grade RAG assistant.
 
 RULES:
-- Use the provided context to answer factual RAG pipeline-related questions.
-- If the context does not contain the answer, say you do not know from the knowledge base.
-- Be concise and factual.
+- Use the provided context to answer factual AI engineer.
+- If the context does not contain the answer, respond: "I do not know from the knowledge base."
+- Be concise, factual, and avoid speculation.
+- Always prioritize retrieved context over pre-trained knowledge.
+- Do not hallucinate or invent information outside the knowledge base.
+- Format answers in clear, recruiter-friendly language when technical explanations are required.
 """
+
+
 
 
 class RAGEngine:
@@ -71,13 +72,9 @@ class RAGEngine:
 
     @staticmethod
     def _build_index() -> VectorStoreIndex:
-        documents = [
-            Document(text="Nepal is a country in South Asia."),
-            Document(text="Kathmandu is the capital of Nepal."),
-            Document(text="Mount Everest is located in Nepal."),
-            Document(text="Pokhara is a major tourist destination in Nepal."),
-            Document(text="Nepal has 7 provinces."),
-        ]
+        with open("sample.txt", "r", encoding="utf-8") as f:
+            content = f.read()
+        documents = [Document(text=content)]
         return VectorStoreIndex.from_documents(documents)
 
     def retrieve_context(self, query: str) -> str:
