@@ -6,6 +6,7 @@ from pathlib import Path
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from openai import BadRequestError
 from pydantic import BaseModel
 
 from rag_engine import RAGEngine
@@ -28,6 +29,7 @@ TTS_OUTPUT_PATH = os.path.join(tempfile.gettempdir(), "sherpa_response.wav")
 STT_MODEL = "whisper-large-v3"
 TTS_MODEL = "canopylabs/orpheus-v1-english"
 TTS_VOICE = "troy"
+TTS_TERMS_URL = "https://console.groq.com/playground?model=canopylabs%2Forpheus-v1-english"
 
 BASE_DIR = Path(__file__).resolve().parent
 SAMPLE_TEXT_PATH = BASE_DIR / "sample.txt"
@@ -159,20 +161,30 @@ async def voice_chat(audio: UploadFile = File(...)):
 
     # 3) Text -> speech (Groq Orpheus)
     tts_start = time.time()
-    speech = engine.client.audio.speech.create(
-        model=TTS_MODEL,
-        voice=TTS_VOICE,
-        input=answer,
-        response_format="wav",
-    )
-    speech.write_to_file(TTS_OUTPUT_PATH)
-    tts_elapsed = time.time() - tts_start
-    print(f"[TIMING] TTS (Orpheus):  {tts_elapsed:.2f}s")
+    audio_url = "/audio-response"
+    try:
+        speech = engine.client.audio.speech.create(
+            model=TTS_MODEL,
+            voice=TTS_VOICE,
+            input=answer,
+            response_format="wav",
+        )
+        speech.write_to_file(TTS_OUTPUT_PATH)
+        tts_elapsed = time.time() - tts_start
+        print(f"[TIMING] TTS (Orpheus):  {tts_elapsed:.2f}s")
+    except BadRequestError as exc:
+        tts_elapsed = time.time() - tts_start
+        if getattr(exc, "code", None) == "model_terms_required":
+            print("[TIMING] TTS (Orpheus):  unavailable (terms not accepted)")
+            print(f"[TTS] Accept terms here: {TTS_TERMS_URL}")
+            audio_url = None
+        else:
+            raise
 
     total_elapsed = stt_elapsed + llm_elapsed + tts_elapsed
     print(f"[TIMING] TOTAL:          {total_elapsed:.2f}s\n")
 
-    return {"transcript": user_text, "answer": answer, "audio_url": "/audio-response"}
+    return {"transcript": user_text, "answer": answer, "audio_url": audio_url}
 
 
 @app.get("/audio-response")

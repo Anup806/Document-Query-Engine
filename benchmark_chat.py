@@ -25,21 +25,21 @@ BASE_URL = "http://localhost:8000"
 # questions about whatever content is in your sample.txt.
 
 test_cases = [
-    {"question": "What is RAG Pipeline?", "expected_keyword": "RAG"},
-    {"question": "How does RAG differ from traditional LLMs?", "expected_keyword": "LLMs"},
-    {"question": "What happens in the data ingestion phase?", "expected_keyword": "data ingestion"},
-    {"question": "Why are documents divided into chunks?", "expected_keyword": "chunks"},
-    {"question": "What are embeddings in RAG?", "expected_keyword": "embeddings"},
-    {"question": "Where are embeddings stored?", "expected_keyword": "vector database"},
-    {"question": "How is a user query processed in RAG?", "expected_keyword": "query"},
-    {"question": "What does the retrieval component do?", "expected_keyword": "retrieval"},
-    {"question": "What happens in the generation stage?", "expected_keyword": "generation"},
-    {"question": "How does RAG improve factual accuracy?", "expected_keyword": "accuracy"},
-    {"question": "How does RAG reduce hallucination?", "expected_keyword": "hallucination"},
-    {"question": "What are some applications of RAG?", "expected_keyword": "applications"},
-    {"question": "Where is RAG used in enterprise?", "expected_keyword": "enterprise search"},
-    {"question": "How is RAG applied in customer support?", "expected_keyword": "customer support"},
-    {"question": "Why is RAG useful for domain-specific knowledge?", "expected_keyword": "domain-specific"},
+    {"question": "Who is an AI Engineer?", "expected_keyword": "AI Engineer"},
+    {"question": "Which programming languages are important for AI engineers?", "expected_keyword": "Python"},
+    {"question": "Which ML libraries do AI engineers use?", "expected_keyword": "TensorFlow"},
+    {"question": "What is the role of MLOps in AI engineering?", "expected_keyword": "MLOps"},
+    {"question": "Which cloud platforms are used by AI engineers?", "expected_keyword": "AWS"},
+    {"question": "What tools help with containerization?", "expected_keyword": "Docker"},
+    {"question": "What orchestration system is commonly used?", "expected_keyword": "Kubernetes"},
+    {"question": "How do AI engineers ensure fairness and transparency?", "expected_keyword": "ethics"},
+    {"question": "Which industries employ AI engineers?", "expected_keyword": "healthcare"},
+    {"question": "What is the difference between AI engineers and data scientists?", "expected_keyword": "deployment"},
+    {"question": "How do AI engineers handle large datasets?", "expected_keyword": "SQL"},
+    {"question": "What is the role of AI engineers in RAG pipelines?", "expected_keyword": "RAG"},
+    {"question": "Why is explainability important in AI engineering?", "expected_keyword": "explainability"},
+    {"question": "What career opportunities exist for AI engineers?", "expected_keyword": "career"},
+    {"question": "Why is continuous learning important for AI engineers?", "expected_keyword": "learning"},
 ]
 
 
